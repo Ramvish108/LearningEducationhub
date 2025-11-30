@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Education Hub - About Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --secondary: #f59e0b;
+            --accent: #10b981;
+            --dark: #1e1b4b;
+            --light: #f8fafc;
+            /* New custom team colors */
+            --team-teaching: #10b981; /* Accent/Green */
+            --team-project: #3b82f6; /* Blue */
+            --team-sales: #f59e0b; /* Secondary/Orange */
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+            background-color: var(--light);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .accent-gradient {
+            background: linear-gradient(90deg, var(--secondary), #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link-effect:hover {
+            transform: translateY(-2px);
+            color: var(--primary-light);
+        }
+
+        /* Animation classes */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered animation for hero text */
+        .hero-title, .hero-subtitle, .hero-button {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero-title { transition: opacity 0.8s ease-out 0.2s, transform 0.8s ease-out 0.2s; }
+        .hero-subtitle { transition: opacity 0.8s ease-out 0.4s, transform 0.8s ease-out 0.4s; }
+        .hero-button { transition: opacity 0.8s ease-out 0.6s, transform 0.8s ease-out 0.6s; }
+
+        .hero-title.is-visible, .hero-subtitle.is-visible, .hero-button.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Slide-in animations */
+        .slide-in-left,
+        .slide-in-right {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .slide-in-left {
+            transform: translateX(-50px);
+        }
+
+        .slide-in-right {
+            transform: translateX(50px);
+        }
+
+        .fade-in-section.is-visible .slide-in-left,
+        .fade-in-section.is-visible .slide-in-right {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.2s; 
+        }
+
+        /* New CSS for Hide-on-Scroll Effect */
+        .header-hidden {
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Ensure the header uses a fast transition for the hide/show effect */
+        header {
+            transition: transform 0.3s ease-in-out, background 0.3s ease;
+        }
+
+        /* ------------------------------------------------------------------ */
+        /* MOBILE MENU STYLES (Opaque Fix) */
+        /* ------------------------------------------------------------------ */
+        .mobile-menu-overlay {
+            background-color: rgba(0, 0, 0, 0.75);
+        }
+
+        .mobile-menu {
+            /* Ensure solid background for readability */
+            background-color: var(--dark); 
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+            width: 75%;
+            max-width: 300px;
+        }
+
+        .mobile-menu-header, .mobile-nav-links, .mobile-buttons {
+            background-color: var(--dark);
+        }
+
+        .mobile-menu-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .mobile-nav-item {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: white;
+        }
+
+        .mobile-nav-item:hover {
+            background-color: var(--primary); 
+            transform: translateX(5px);
+        }
+        /* ------------------------------------------------------------------ */
+        
+        /* New Team Badges */
+        .team-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px; 
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+        .team-badge.teaching {
+            background-color: var(--team-teaching); 
+            color: white;
+        }
+        .team-badge.project {
+            background-color: var(--team-project); 
+            color: white;
+        }
+        .team-badge.sales {
+            background-color: var(--team-sales); 
+            color: white;
+        }
+        
+        /* Team Group Headings */
+        .team-group-heading {
+            font-size: 1.75rem; 
+            font-weight: 700; 
+            margin-top: 2.5rem; 
+            margin-bottom: 0.5rem; 
+            color: var(--primary);
+        }
+        
+        .team-group-subtitle {
+            font-size: 1rem; 
+            color: #4b5563; 
+            margin-bottom: 2rem; 
+        }
+
+
+        /* Hackathon badge */
+        .hackathon-badge {
+            background: linear-gradient(90deg, var(--secondary), #f97316);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        /* Button styles */
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(90deg, var(--secondary), #f97316);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Header styles */
+        .main-header {
+            background: rgba(30, 27, 75, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Footer styles */
+        .main-footer {
+            background: var(--dark);
+            color: white;
+        }
+
+        /* Team card animations */
+        .team-card {
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            /* Add hover effect to team card for consistency */
+            cursor: pointer;
+        }
+        
+        .team-card:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 10px 20px rgba(79, 70, 229, 0.1);
+        }
+
+
+        .fade-in-section.is-visible .team-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered delays for team cards */
+        .fade-in-section.is-visible .team-card:nth-child(1) { transition-delay: 0.1s; }
+        .fade-in-section.is-visible .team-card:nth-child(2) { transition-delay: 0.2s; }
+        .fade-in-section.is-visible .team-card:nth-child(3) { transition-delay: 0.3s; }
+        .fade-in-section.is-visible .team-card:nth-child(4) { transition-delay: 0.4s; }
+        .fade-in-section.is-visible .team-card:nth-child(5) { transition-delay: 0.5s; }
+        .fade-in-section.is-visible .team-card:nth-child(6) { transition-delay: 0.6s; }
+        .fade-in-section.is-visible .team-card:nth-child(7) { transition-delay: 0.7s; }
+        .fade-in-section.is-visible .team-card:nth-child(8) { transition-delay: 0.8s; }
+        .fade-in-section.is-visible .team-card:nth-child(9) { transition-delay: 0.9s; }
+
+        /* Custom styles for the new Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1rem;
+        }
+        .gallery-item {
+            width: 100%;
+            height: 300px; /* Fixed height for all images on mobile */
+            object-fit: cover;
+            border-radius: 0.75rem; /* rounded-xl */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Tablet/Desktop: 2 columns */
+        @media (min-width: 640px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            .gallery-item {
+                height: 350px; /* Increased height for bigger display */
+            }
+        }
+        
+        /* Large Desktop: 3 columns (All same size) */
+        @media (min-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+            .gallery-item {
+                height: 400px; /* Large, uniform height */
+            }
+        }
+
+
+        /* Mobile responsive updates */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .stat-card {
+                padding: 1.5rem;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .leadership-card {
+                padding: 1.5rem;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .team-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+            
+            .values-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+<header id="main-header" class="main-header sticky top-0 z-50">
+    <nav class="container mx-auto flex items-center justify-between p-4 text-white">
+        
+        <a href="/" class="flex items-center space-x-2">
+            <span class="text-xl sm:text-2xl font-bold text-white">Learning Education Hub</span>
+        </a>
+
+        <div class="hidden sm:flex items-center space-x-8 text-lg font-semibold">
+            <a href="/" class="hover:text-indigo-300 transition-colors duration-300">Home</a>
+             <a href="/hackathon" class="hover:text-indigo-300 transition-colors duration-300">Hackathon <span class="hackathon-badge">New</span></a>
+            <a href="/aboutus" class="hover:text-indigo-300 transition-colors duration-300">About Us</a>
+            <a href="/course" class="hover:text-indigo-300 transition-colors duration-300">Courses</a>
+            <a href="services" class="hover:text-indigo-300 transition-colors duration-300">Our Service</a>
+            
+            <a href="contactus" class="hover:text-indigo-300 transition-colors duration-300">Contact Us</a>
+        </div>
+        
+        <div class="hidden sm:flex items-center space-x-4">
+            <a href="/login" class="btn-primary">Student Login</a>
+           
+        </div>
+
+        <div class="sm:hidden">
+            <button id="hamburger-btn" class="focus:outline-none" aria-label="Open menu">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay fixed inset-0 z-30 hidden"></div>
+
+    <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 h-full text-white p-6 space-y-6
+                 transform -translate-x-full transition-transform duration-300 ease-in-out z-40
+                 flex flex-col">
+        
+        <div class="mobile-menu-header flex items-center justify-between pb-4">
+            <span class="text-2xl font-bold">Menu</span>
+            <button id="close-menu-btn" class="focus:outline-none hover:bg-white hover:bg-opacity-10 rounded-full p-1 transition-colors" aria-label="Close menu">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <nav class="mobile-nav-links flex flex-col space-y-2 text-lg font-medium flex-grow">
+            <a href="/" class="mobile-nav-item hover:text-indigo-300">Home</a>
+            <a href="/hackathon" class="mobile-nav-item hover:text-indigo-300 flex items-center justify-between">
+                <span>Hackathon</span>
+                <span class="hackathon-badge">New</span>
+            </a>
+            <a href="/aboutus" class="mobile-nav-item hover:text-indigo-300">About Us</a>
+            <a href="/course" class="mobile-nav-item hover:text-indigo-300">Courses</a>
+            <a href="services" class="mobile-nav-item hover:text-indigo-300">Our Service</a>
+            <a href="contactus" class="mobile-nav-item hover:text-indigo-300">Contact Us</a>
+        </nav>
+
+        <div class="mobile-buttons flex flex-col space-y-3 mt-auto">
+            <a href="/login" class="btn-primary text-center py-3">Student Login</a>
+            
+        </div>
+    </div>
+</header>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+        function openMenu() {
+            mobileMenu.classList.remove('-translate-x-full');
+            mobileMenuOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.add('-translate-x-full');
+            mobileMenuOverlay.classList.add('hidden');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        hamburgerBtn.addEventListener('click', openMenu);
+        closeMenuBtn.addEventListener('click', closeMenu);
+        mobileMenuOverlay.addEventListener('click', closeMenu);
+        
+        // --- Scroll Animation Logic ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    
+                    // Animate team cards with staggered delay
+                    if (entry.target.querySelector('.team-card')) {
+                         const cards = entry.target.querySelectorAll('.team-card');
+                         cards.forEach((card, index) => {
+                             // Apply initial hidden styles to cards for animation to work correctly
+                             card.style.opacity = 0;
+                             card.style.transform = 'translateY(20px)';
+                             
+                             // Apply staggered effect after section becomes visible
+                             setTimeout(() => {
+                                 card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                                 card.style.transitionDelay = `${index * 0.1}s`; 
+                                 card.style.opacity = 1;
+                                 card.style.transform = 'translateY(0)';
+                             }, 50); // Start the staggering animation shortly after section visibility is triggered
+                        });
+                    }
+                     observer.unobserve(entry.target); // Stop observing after animation triggers
+                }
+            });
+        }, observerOptions);
+
+        const fadeElements = document.querySelectorAll('.fade-in-section');
+        fadeElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // Hide-on-Scroll Logic for header
+        const header = document.getElementById('main-header');
+        let lastScrollY = window.scrollY;
+        const scrollThreshold = 100;
+
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > lastScrollY && currentScrollY > scrollThreshold) {
+                header.classList.add('header-hidden');
+            } else if (currentScrollY < lastScrollY || currentScrollY < 10) {
+                header.classList.remove('header-hidden');
+            }
+
+            lastScrollY = currentScrollY;
+        });
+    });
+</script>
+
+    <main class="py-10">
+        <section class="container mx-auto px-4 py-16 fade-in-section">
+            <div class="text-center">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-blue-900">About Learning Education Hub</h1>
+                <p class="text-lg sm:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                    Empowering the next generation of tech professionals through innovative education, 
+                    hands-on training, and career-focused mentorship since 2015.
+                </p>
+            </div>
+        </section>
+
+        <section class="container mx-auto px-4 py-16 fade-in-section">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="slide-in-left">
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-6 gradient-text">Our Mission</h2>
+                    <p class="text-base sm:text-lg text-gray-700 leading-relaxed mb-6">
+                        To bridge the gap between academic learning and industry requirements by providing 
+                        comprehensive, practical education that transforms students into job-ready professionals.
+                    </p>
+                    <p class="text-base sm:text-lg text-gray-700 leading-relaxed">
+                        We believe in learning by doing, and our project-based approach ensures that every 
+                        student graduates with real-world experience and a portfolio that stands out.
+                    </p>
+                </div>
+                <div class="slide-in-right">
+                    <img src="static/ailab.jpg" 
+                          alt="Learning Environment" 
+                          class="rounded-2xl shadow-2xl w-full h-auto object-cover">
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-blue-900 text-white py-16 fade-in-section">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">Our Impact in Numbers</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 text-center">
+                    <div class="stat-card p-4 sm:p-6 bg-blue-800 rounded-xl transition-all duration-300">
+                        <div class="text-3xl sm:text-4xl font-bold mb-2">5000+</div>
+                        <div class="text-blue-200 text-sm sm:text-base">Students Trained</div>
+                    </div>
+                    <div class="stat-card p-4 sm:p-6 bg-blue-800 rounded-xl transition-all duration-300">
+                        <div class="text-3xl sm:text-4xl font-bold mb-2">99%</div>
+                        <div class="text-blue-200 text-sm sm:text-base">Success Rate</div>
+                    </div>
+                    <div class="stat-card p-4 sm:p-6 bg-blue-800 rounded-xl transition-all duration-300">
+                        <div class="text-3xl sm:text-4xl font-bold mb-2">200+</div>
+                        <div class="text-blue-200 text-sm sm:text-base">Live Projects</div>
+                    </div>
+                    <div class="stat-card p-4 sm:p-6 bg-blue-800 rounded-xl transition-all duration-300">
+                        <div class="text-3xl sm:text-4xl font-bold mb-2">10</div>
+                        <div class="text-blue-200 text-sm sm:text-base">Years of Excellence</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container mx-auto px-4 py-16 fade-in-section">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4 gradient-text">Meet Our Leadership Team</h2>
+                <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+                    Guided by experienced professionals passionate about education and technology
+                </p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8 mb-12 fade-in-section">
+                <div class="flex flex-col lg:flex-row items-center gap-6 sm:gap-8">
+                    <div class="lg:w-1/3">
+                        <img src="static/ankitsir.jpg" 
+                             alt="Director" 
+                             class="rounded-2xl w-48 h-48 sm:w-64 sm:h-64 object-cover mx-auto shadow-lg">
+                    </div>
+                    <div class="lg:w-2/3 text-center lg:text-left mt-6 lg:mt-0">
+                        <h3 class="text-2xl sm:text-3xl font-bold mb-2 text-blue-900">Ankit Maheshwari</h3>
+                        <p class="text-lg sm:text-xl text-blue-600 mb-4">Director</p>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            With over 12 years of experience in the education technology sector, 
+                            Ankit leads our vision of making quality tech education accessible to all. 
+                            His passion for innovation and student success drives our institution forward.
+                        </p>
+                        <p class="text-gray-700 leading-relaxed">
+                            "We don't just teach technology; we inspire future innovators and problem-solvers 
+                            who will shape the digital landscape of tomorrow."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8 mb-12 fade-in-section">
+                <div class="flex flex-col lg:flex-row-reverse items-center gap-6 sm:gap-8">
+                    <div class="lg:w-1/3">
+                        <img src="https://placehold.co/300x300/1e3a8a/FFFFFF?text=Abhijit+Sharma" 
+                             alt="Executive Director" 
+                             class="rounded-2xl w-48 h-48 sm:w-64 sm:h-64 object-cover mx-auto shadow-lg">
+                    </div>
+                    <div class="lg:w-2/3 text-center lg:text-left mt-6 lg:mt-0">
+                        <h3 class="text-2xl sm:text-3xl font-bold mb-2 text-blue-900">Abhijit Sharma</h3>
+                        <p class="text-lg sm:text-xl text-blue-600 mb-4">Executive Director</p>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            Abhijit brings 7+ years of expertise in academic management and student development. 
+                            He oversees our curriculum design and ensures our programs remain industry-relevant.
+                        </p>
+                        <p class="text-gray-700 leading-relaxed">
+                            "Our commitment is to provide not just education, but a transformative learning 
+                            experience that opens doors to incredible career opportunities."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container mx-auto px-4 py-16 fade-in-section">
+            
+            <div class="text-center">
+                <h3 class="team-group-heading text-3xl sm:text-4xl font-bold mb-4 gradient-text">Teaching Team</h3>
+                <p class="team-group-subtitle">Dedicated professionals committed to delivering quality education and technical expertise.</p>
+            </div>
+            
+            <div class="team-grid grid">
+                
+                <div class="team-card bg-white rounded-xl shadow-lg p-6 text-center">
+                    <span class="team-badge teaching">TEACHING TEAM</span>
+                    <img src="static/laxmi.jpg" 
+                          alt="Laxmi Mam" 
+                          class="rounded-full w-24 h-24 sm:w-32 sm:h-32 object-cover mx-auto mb-4 shadow-md">
+                    <h3 class="text-xl font-bold mb-2 text-blue-900">Laxmi Patel/h3>
+                    <p class="text-blue-600 mb-3">Senior Instructor </p>
+
+                </div>
+
+                <div class="team-card bg-white rounded-xl shadow-lg p-6 text-center">
+                    <span class="team-badge teaching">TEACHING TEAM</span>
+                    <img src="static/aditya.jpg" 
+                          alt="Aditya Sir" 
+                          class="rounded-full w-24 h-24 sm:w-32 sm:h-32 object-cover mx-auto mb-4 shadow-md">
+                    <h3 class="text-xl font-bold mb-2 text-blue-900">Aditya Kandwal</h3>
+                    <p class="text-blue-600 mb-3">Digital Marketing Head</p>
+
+                </div>
+
+                <div class="team-card bg-white rounded-xl shadow-lg p-6 text-center">
+                    <span class="team-badge teaching">TEACHING TEAM</span>
+                    <img src="static/jp.jpg" 
+                          alt="JP Sir" 
+                          class="rounded-full w-24 h-24 sm:w-32 sm:h-32 object-cover mx-auto mb-4 shadow-md">
+                    <h3 class="text-xl font-bold mb-2 text-blue-900">J.P. Gupta</h3>
+                    <p class="text-blue-600 mb-3">Core Instructor </p>
+
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <h3 class="team-group-heading text-3xl sm:text-4xl font-bold mb-4 gradient-text">Project Team</h3>
+                <p class="team-group-subtitle">Dedicated professionals committed to guiding students through real-world projects and development cycles.</p>
+            </div>
+            
+            <div class="team-grid grid">
+                <div class="team-card bg-white rounded-xl shadow-lg p-6 text-center">
+                    <span class="team-badge project">PROJECT TEAM</span>
+                    <img src="static/yash.jpg" 
+                          alt="Yash Sir" 
+                          class="rounded-full w-24 h-24 sm:w-32 sm:h-32 object-cover mx-auto mb-4 shadow-md">
+                    <h3 class="text-xl font-bold mb-2 text-blue-900">Yash Nagar</h3>
+                    <p class="text-blue-600 mb-3">Project Manager </p>
+
+                </div>
+
+                <div class="team-card bg-white rounded-xl shadow-lg p-6 text-center">
+                    <span class="team-badge project">PROJECT TEAM</span>
+                    <img src="static/raj.jpg" 
+                          alt="Raj Sir" 
+                          class="rounded-full w-24 h-24 sm:w-32 sm:h-32 object-cover mx-auto mb-4 shadow-md">
+                    <h3 class="text-xl font-bold mb-2 text-blue-900">Raj Thakur</h3>
+                    <p class="text-blue-600 mb-3">Project Coordinator</p>
+
+                </div>
+
+                <div class="team-card bg-white rounded-xl shadow-lg p-6 text-center">
+                    <span class="team-badge project">PROJECT TEAM</span>
+                    <img src="static/ram.jpg" 
+                          alt="Ram Sir" 
+                          class="rounded-full w-24 h-24 sm:w-32 sm:h-32 object-cover mx-auto mb-4 shadow-md">
+                    <h3 class="text-xl font-bold mb-2 text-blue-900">Ram Vishwakarma</h3>
+                    <p class="text-blue-600 mb-3">Project Handler </p>
+
+                </div>
+            </div>
+                
+            <div class="text-center">
+                <h3 class="team-group-heading text-3xl sm:text-4xl font-bold mb-4 gradient-text">Sales Team</h3>
+                <p class="team-group-subtitle">Dedicated professionals committed to providing enrollment support and career counseling.</p>
+            </div>
+            
+            <div class="team-grid grid">
+                <div class="team-card bg-white rounded-xl shadow-lg p-6 text-center">
+                    <span class="team-badge sales">SALES TEAM</span>
+                    <img src="static/anand.jpg" 
+                          alt="Manoj" 
+                          class="rounded-full w-24 h-24 sm:w-32 sm:h-32 object-cover mx-auto mb-4 shadow-md">
+                    <h3 class="text-xl font-bold mb-2 text-blue-900">T. Anand Chourey</h3>
+                    <p class="text-blue-600 mb-3">Enrollment Specialist</p>
+   
+                </div>
+                
+                <div class="team-card bg-white rounded-xl shadow-lg p-6 text-center">
+                    <span class="team-badge sales">SALES TEAM</span>
+                    <img src="static/rashmi.jpg" 
+                          alt="Rashmi" 
+                          class="rounded-full w-24 h-24 sm:w-32 sm:h-32 object-cover mx-auto mb-4 shadow-md">
+                    <h3 class="text-xl font-bold mb-2 text-blue-900">Rashmi Mishra</h3>
+                    <p class="text-blue-600 mb-3">Student Counselor</p>
+
+                </div>
+                
+                <div class="team-card bg-white rounded-xl shadow-lg p-6 text-center">
+                    <span class="team-badge sales">SALES TEAM</span>
+                    <img src="static/dipali.jpg" 
+                          alt="Pooja" 
+                          class="rounded-full w-24 h-24 sm:w-32 sm:h-32 object-cover mx-auto mb-4 shadow-md">
+                    <h3 class="text-xl font-bold mb-2 text-blue-900">Deepali Modanwal</h3>
+                    <p class="text-blue-600 mb-3">Admissions Support</p>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section class="bg-blue-50 py-16 fade-in-section">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-4 gradient-text">Our Core Values</h2>
+                </div>
+                <div class="values-grid grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                    <div class="text-center p-6">
+                        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">🚀</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-blue-900">Innovation</h3>
+                        <p class="text-gray-600 text-sm sm:text-base">
+                            Constantly evolving our curriculum to match industry trends and technological advancements
+                        </p>
+                    </div>
+                    <div class="text-center p-6">
+                        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">💡</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-blue-900">Excellence</h3>
+                        <p class="text-gray-600 text-sm sm:text-base">
+                            Committed to delivering the highest quality education and student support
+                        </p>
+                    </div>
+                    <div class="text-center p-6">
+                        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">🤝</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-blue-900">Community</h3>
+                        <p class="text-gray-600 text-sm sm:text-base">
+                            Building a supportive network of learners, mentors, and industry professionals
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="container mx-auto px-4 py-16 fade-in-section">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4 gradient-text">Our Campus & Activities</h2>
+                <p class="text-base sm:text-lg text-gray-600">A glimpse into the vibrant learning environment at LEH.</p>
+            </div>
+            
+            <div class="gallery-grid">
+                
+                <img src="static/ailab.jpg" alt="Student Activity" class="gallery-item">
+
+                <img src="static/classroom.jpg" alt="Classroom" class="gallery-item">
+                
+                <img src="static/clasroom2.jpg" alt="Lab Session" class="gallery-item">
+                
+                <img src="static/counciling.jpg" alt="Major Event" class="gallery-item">
+
+                <img src="static/coridor.jpg" alt="Graduation" class="gallery-item">
+                
+                <img src="static/lab.jpg" alt="Student Group" class="gallery-item">
+
+            </div>
+        </section>
+        </main>
+
+    <footer class="bg-blue-900 text-white py-8 text-center">
+        <div class="container mx-auto px-4">
+            <small class="text-gray-300">Copyright © 2024 All rights reserved with LEH | Made in INDIA</small>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Mobile menu functionality
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const closeMenuBtn = document.getElementById('close-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+            function openMenu() {
+                mobileMenu.classList.remove('-translate-x-full');
+                mobileMenuOverlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            }
+
+            function closeMenu() {
+                mobileMenu.classList.add('-translate-x-full');
+                mobileMenuOverlay.classList.add('hidden');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+
+            hamburgerBtn.addEventListener('click', openMenu);
+            closeMenuBtn.addEventListener('click', closeMenu);
+            mobileMenuOverlay.addEventListener('click', closeMenu);
+            
+            // Enhanced scroll animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        
+                        // Animate team cards with staggered delay
+                        if (entry.target.querySelector('.team-card')) {
+                             const cards = entry.target.querySelectorAll('.team-card');
+                             cards.forEach((card, index) => {
+                                 // Apply initial hidden styles to cards for animation to work correctly
+                                 card.style.opacity = 0;
+                                 card.style.transform = 'translateY(20px)';
+                                 
+                                 // Apply staggered effect after section becomes visible
+                                 setTimeout(() => {
+                                     card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                                     card.style.transitionDelay = `${index * 0.1}s`; 
+                                     card.style.opacity = 1;
+                                     card.style.transform = 'translateY(0)';
+                                 }, 50); // Start the staggering animation shortly after section visibility is triggered
+                            });
+                        }
+                        observer.unobserve(entry.target); // Stop observing after animation triggers
+                    }
+                });
+            }, observerOptions);
+
+            const fadeElements = document.querySelectorAll('.fade-in-section');
+            fadeElements.forEach(el => {
+                observer.observe(el);
+            });
+
+            // Hide-on-Scroll Logic for header
+            const header = document.getElementById('main-header');
+            let lastScrollY = window.scrollY;
+            const scrollThreshold = 100;
+
+            window.addEventListener('scroll', () => {
+                const currentScrollY = window.scrollY;
+
+                if (currentScrollY > lastScrollY && currentScrollY > scrollThreshold) {
+                    header.classList.add('header-hidden');
+                } else if (currentScrollY < lastScrollY || currentScrollY < 10) {
+                    header.classList.remove('header-hidden');
+                }
+
+                lastScrollY = currentScrollY;
+            });
+        });
+    </script>
+</body>
+</html>

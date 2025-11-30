@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Education Hub - Contact Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --secondary: #f59e0b;
+            --accent: #10b981;
+            --dark: #1e1b4b;
+            --light: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+            background-color: var(--light);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .accent-gradient {
+            background: linear-gradient(90deg, var(--secondary), #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link-effect:hover {
+            transform: translateY(-2px);
+            color: var(--primary-light);
+        }
+
+        /* Animation classes */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered animation for hero text */
+        .hero-title, .hero-subtitle, .hero-button {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero-title { transition: opacity 0.8s ease-out 0.2s, transform 0.8s ease-out 0.2s; }
+        .hero-subtitle { transition: opacity 0.8s ease-out 0.4s, transform 0.8s ease-out 0.4s; }
+        .hero-button { transition: opacity 0.8s ease-out 0.6s, transform 0.8s ease-out 0.6s; }
+
+        .hero-title.is-visible, .hero-subtitle.is-visible, .hero-button.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Slide-in animations */
+        .slide-in-left,
+        .slide-in-right {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .slide-in-left {
+            transform: translateX(-50px);
+        }
+
+        .slide-in-right {
+            transform: translateX(50px);
+        }
+
+        .fade-in-section.is-visible .slide-in-left,
+        .fade-in-section.is-visible .slide-in-right {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.2s; 
+        }
+
+        /* New CSS for Hide-on-Scroll Effect */
+        .header-hidden {
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Ensure the header uses a fast transition for the hide/show effect */
+        header {
+            transition: transform 0.3s ease-in-out, background 0.3s ease;
+        }
+
+        /* ------------------------------------------------------------------ */
+        /* MOBILE MENU STYLES (Adjusted for Readability) */
+        /* ------------------------------------------------------------------ */
+        .mobile-menu-overlay {
+            background-color: rgba(0, 0, 0, 0.75); /* Darker overlay for better contrast */
+        }
+
+        .mobile-menu {
+            background-color: var(--dark); /* Use solid dark color */
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+            width: 75%; /* Set a specific width */
+            max-width: 300px;
+        }
+
+        .mobile-menu-header, .mobile-nav-links, .mobile-buttons {
+            background-color: var(--dark);
+        }
+        
+        .mobile-menu-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            padding-bottom: 1rem;
+        }
+
+        .mobile-nav-item {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: white; /* Ensure text color is white/light */
+        }
+
+        .mobile-nav-item:hover {
+            background-color: var(--primary); /* Highlight on hover */
+            transform: translateX(5px);
+        }
+        /* ------------------------------------------------------------------ */
+
+
+        /* Hackathon badge */
+        .hackathon-badge {
+            background: linear-gradient(90deg, var(--secondary), #f97316);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        /* Button styles */
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(90deg, var(--secondary), #f97316);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Header styles */
+        .main-header {
+            background: rgba(30, 27, 75, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Footer styles */
+        .main-footer {
+            background: var(--dark);
+            color: white;
+        }
+        
+        /* Form styling fix for better appearance */
+        .form-input {
+            border: 1px solid #d1d5db; /* gray-300 */
+            background-color: #f9fafb; /* gray-50 */
+            transition: border-color 0.2s ease;
+        }
+        .form-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 1px var(--primary);
+        }
+        
+    </style>
+</head>
+<body class="bg-white">
+
+<header id="main-header" class="main-header sticky top-0 z-50">
+    <nav class="container mx-auto flex items-center justify-between p-4 text-white">
+        
+        <a href="/" class="flex items-center space-x-2">
+            <span class="text-2xl font-bold text-white">Learning Education Hub</span>
+        </a>
+
+        <div class="hidden sm:flex items-center space-x-8 text-lg font-semibold">
+            <a href="/" class="hover:text-indigo-300 transition-colors duration-300">Home</a>
+             <a href="/hackathon" class="hover:text-indigo-300 transition-colors duration-300">Hackathon <span class="hackathon-badge">New</span></a>
+            <a href="/aboutus" class="hover:text-indigo-300 transition-colors duration-300">About Us</a>
+            <a href="/course" class="hover:text-indigo-300 transition-colors duration-300">Courses</a>
+            <a href="services" class="hover:text-indigo-300 transition-colors duration-300">Our Service</a>
+            
+            <a href="contactus" class="hover:text-indigo-300 transition-colors duration-300">Contact Us</a>
+        </div>
+        
+        <div class="hidden sm:flex items-center space-x-4">
+            <a href="/login" class="btn-primary">Student Login</a>
+           
+        </div>
+
+        <div class="sm:hidden">
+            <button id="hamburger-btn" class="focus:outline-none" aria-label="Open menu">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay fixed inset-0 z-30 hidden"></div>
+
+    <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 h-full text-white p-6 space-y-6
+                 transform -translate-x-full transition-transform duration-300 ease-in-out z-40
+                 flex flex-col">
+        
+        <div class="mobile-menu-header flex items-center justify-between pb-4">
+            <span class="text-2xl font-bold">Menu</span>
+            <button id="close-menu-btn" class="focus:outline-none hover:bg-white hover:bg-opacity-10 rounded-full p-1 transition-colors" aria-label="Close menu">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <nav class="mobile-nav-links flex flex-col space-y-2 text-lg font-medium flex-grow">
+            <a href="/" class="mobile-nav-item hover:text-indigo-300">Home</a>
+            <a href="/hackathon" class="mobile-nav-item hover:text-indigo-300 flex items-center justify-between">
+                <span>Hackathon</span>
+                <span class="hackathon-badge">New</span>
+            </a>
+            <a href="/aboutus" class="mobile-nav-item hover:text-indigo-300">About Us</a>
+            <a href="/course" class="mobile-nav-item hover:text-indigo-300">Courses</a>
+            <a href="services" class="mobile-nav-item hover:text-indigo-300">Our Service</a>
+            <a href="contactus" class="mobile-nav-item hover:text-indigo-300">Contact Us</a>
+        </nav>
+
+        <div class="mobile-buttons flex flex-col space-y-3 mt-auto">
+            <a href="/login" class="btn-primary text-center py-3">Student Login</a>
+
+        </div>
+    </div>
+</header>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+        function openMenu() {
+            mobileMenu.classList.remove('-translate-x-full');
+            mobileMenuOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.add('-translate-x-full');
+            mobileMenuOverlay.classList.add('hidden');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        hamburgerBtn.addEventListener('click', openMenu);
+        closeMenuBtn.addEventListener('click', closeMenu);
+        mobileMenuOverlay.addEventListener('click', closeMenu);
+        
+        // --- Scroll Animation Logic ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    
+                    // Animate contact cards with staggered delay
+                    if (entry.target.querySelector('.contact-card')) {
+                        const cards = entry.target.querySelectorAll('.contact-card');
+                        cards.forEach((card, index) => {
+                             // Apply a slight delay for staggered effect
+                             card.style.transitionDelay = `${index * 0.1}s`; 
+                             card.style.opacity = 1;
+                             card.style.transform = 'translateY(0)';
+                        });
+                    }
+                     observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const fadeElements = document.querySelectorAll('.fade-in-section');
+        fadeElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // Hide-on-Scroll Logic for header
+        const header = document.getElementById('main-header');
+        let lastScrollY = window.scrollY;
+        const scrollThreshold = 100;
+
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > lastScrollY && currentScrollY > scrollThreshold) {
+                header.classList.add('header-hidden');
+            } else if (currentScrollY < lastScrollY || currentScrollY < 10) {
+                header.classList.remove('header-hidden');
+            }
+
+            lastScrollY = currentScrollY;
+        });
+
+        // Appointment form handling
+        const appointmentForm = document.getElementById('appointment-form');
+        if (appointmentForm) {
+            appointmentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Here you would typically send the form data to your server
+                alert('Thank you! Your appointment request has been submitted. We will contact you shortly to confirm.');
+                this.reset();
+            });
+        }
+    });
+
+    // Scroll to appointment form function
+    function scrollToAppointment() {
+        document.getElementById('contact').scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+</script>
+
+    <main class="py-10">
+        <section class="container mx-auto px-4 py-16 fade-in-section">
+            <div class="text-center">
+                <h1 class="text-5xl sm:text-6xl font-extrabold mb-6 text-blue-900">Get In Touch</h1>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                    We're here to help you start your tech journey. Reach out to us through any channel that works best for you.
+                </p>
+            </div>
+        </section>
+
+        <section class="container mx-auto px-4 py-8 fade-in-section">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="contact-card bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 whatsapp-pulse">
+                        <i class="fab fa-whatsapp text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-blue-900">WhatsApp Support</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Quick responses for all your queries</p>
+                    <a href="https://wa.me/917470610859" target="_blank" class="inline-block px-6 py-2 bg-green-600 text-white font-bold rounded-full hover:scale-105 transition-transform duration-300">
+                        Message Now
+                    </a>
+                </div>
+
+                <div class="contact-card bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-phone text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-blue-900">Call Us</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Speak directly with our counselors</p>
+                    <a href="tel:7470610859" class="inline-block px-6 py-2 bg-blue-600 text-white font-bold rounded-full hover:scale-105 transition-transform duration-300">
+                        Call Now
+                    </a>
+                </div>
+
+                <div class="contact-card bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-envelope text-red-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-blue-900">Email Us</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Send detailed queries and requests</p>
+                    <a href="mailto:learningeducationhub@gmail.com" class="inline-block px-6 py-2 bg-red-600 text-white font-bold rounded-full hover:scale-105 transition-transform duration-300">
+                        Send Email
+                    </a>
+                </div>
+
+                <div class="contact-card bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-calendar-check text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-blue-900">Book Appointment</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Schedule a personalized consultation</p>
+                    <button onclick="scrollToAppointment()" class="px-6 py-2 bg-purple-600 text-white font-bold rounded-full hover:scale-105 transition-transform duration-300">
+                        Book Now
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="container mx-auto px-4 py-16 fade-in-section">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="slide-in-left">
+                    <h2 class="text-4xl font-bold mb-6 gradient-text">Visit Our Campus</h2>
+                    <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+                        <div class="flex items-start mb-4">
+                            <i class="fas fa-map-marker-alt text-blue-600 text-xl mt-1 mr-4"></i>
+                            <div>
+                                <h3 class="text-lg font-bold mb-1">Address</h3>
+                                <p class="text-gray-600">
+                                    Kalpataru Tower, 131/16, Opp. Mahendra Coaching,<br>
+                                    Near Pragati Petrol Pump, Zone-II,<br>
+                                    Maharana Pratap Nagar, Bhopal, MP 462011
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-start mb-4">
+                            <i class="fas fa-clock text-blue-600 text-xl mt-1 mr-4"></i>
+                            <div>
+                                <h3 class="text-lg font-bold mb-1">Working Hours</h3>
+                                <p class="text-gray-600">
+                                    Monday - Saturday: 10:00 AM - 7:00 PM<br>
+                                    Sunday: Off
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 text-blue-900">Follow Us</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="social-icon bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center text-white">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://www.instagram.com/learningeducationhubbhopal?igsh=MXYxYzVvaGQyZ2kwdQ==" class="social-icon bg-pink-600 w-12 h-12 rounded-full flex items-center justify-center text-white">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://github.com/learningeducationhub" class="social-icon bg-gray-800 w-12 h-12 rounded-full flex items-center justify-center text-white">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="social-icon bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center text-white">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                {% comment %} <div class="slide-in-right">
+                    <h2 class="text-4xl font-bold mb-6 gradient-text">Book an Appointment</h2>
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <form id="appointment-form" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                                    <input type="text" required class="form-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                                    <input type="text" required class="form-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                                <input type="email" required class="form-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                                <input type="tel" required class="form-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Date</label>
+                                    <input type="date" required class="form-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Time</label>
+                                    <select required class="form-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                        <option value="">Select Time</option>
+                                        <option value="14:00">2:00 PM</option>
+                                        <option value="15:00">3:00 PM</option>
+                                        <option value="16:00">4:00 PM</option>
+                                        <option value="17:00">5:00 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Course Interested In</label>
+                                <select required class="form-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <option value="">Select Course</option>
+                                    <option value="fullstack">Full Stack Development</option>
+                                    <option value="datascience">Data Science & Analytics</option>
+                                    <option value="ai-ml">AI & Machine Learning</option>
+                                    <option value="cybersecurity">Cyber Security</option>
+                                    <option value="cloud">Cloud Computing</option>
+                                    <option value="java">Advanced Java</option>
+                                    <option value="c&c++">C and C++</option>
+                                    <option value="Python">Python</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Additional Message</label>
+                                <textarea rows="4" class="form-input w-full px-4 py-3 rounded-lg focus:outline-none" placeholder="Any specific questions or requirements..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300">
+                                Book Appointment
+                            </button>
+                        </form> {% endcomment %}
+                    {% comment %} </div>
+                </div>
+            </div> {% endcomment %}
+        </section>
+
+        <section class="container mx-auto px-4 py-16 fade-in-section">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="text-center p-6 border-b">
+                    <h2 class="text-3xl font-bold mb-2 gradient-text">Find Us Here</h2>
+                    <p class="text-gray-600">Visit our campus for a personalized counseling session</p>
+                </div>
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.0789932196903!2d77.43299727483033!3d23.22907250859143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397c437a23cca1b1%3A0x1ab63361ba57714c!2sLEARNING%20EDUCATION%20HUB%20-%20C%20%26%20C%2B%2B%20Language%20Institute%20%2CPython%20Java%20Institute%20In%20Bhopal%20%2CTally%2CMSOffice%20Coaching%20In%20Bhopal!5e1!3m2!1sen!2sin!4v1749475109065!5m2!1sen!2sin" 
+                    width="100%" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    class="w-full">
+                </iframe>
+            </div>
+        </section>
+
+        <section class="bg-blue-900 text-white py-8 fade-in-section">
+            <div class="container mx-auto px-4 text-center">
+                <div class="flex flex-col md:flex-row items-center justify-between">
+                    <div class="mb-4 md:mb-0">
+                        <h3 class="text-xl font-bold mb-2">Need Immediate Assistance?</h3>
+                        <p class="text-blue-100">Our team is available to help you right now</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="tel:7470610859" class="px-6 py-3 bg-green-600 text-white font-bold rounded-full hover:scale-105 transition-transform duration-300 flex items-center justify-center">
+                            <i class="fas fa-phone mr-2"></i> Call Now: 7470610859
+                        </a>
+                        <a href="https://wa.me/917470610859" target="_blank" class="px-6 py-3 bg-white text-green-600 font-bold rounded-full hover:scale-105 transition-transform duration-300 flex items-center justify-center">
+                            <i class="fab fa-whatsapp mr-2"></i> WhatsApp Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-blue-900 text-white py-8 text-center">
+        <div class="container mx-auto px-4">
+            <small class="text-gray-300">Copyright © 2024 All rights reserved with LEH | Made in INDIA</small>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Mobile menu functionality
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const closeMenuBtn = document.getElementById('close-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+
+            function openMenu() {
+                mobileMenu.classList.remove('-translate-x-full');
+                mobileMenuOverlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            }
+
+            function closeMenu() {
+                mobileMenu.classList.add('-translate-x-full');
+                mobileMenuOverlay.classList.add('hidden');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+
+            if (hamburgerBtn && closeMenuBtn && mobileMenu && mobileMenuOverlay) {
+                hamburgerBtn.addEventListener('click', openMenu);
+                closeMenuBtn.addEventListener('click', closeMenu);
+                mobileMenuOverlay.addEventListener('click', closeMenu);
+            }
+
+            // Enhanced scroll animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        
+                        // Animate contact cards with staggered delay
+                        if (entry.target.querySelector('.contact-card')) {
+                             const cards = entry.target.querySelectorAll('.contact-card');
+                             cards.forEach((card, index) => {
+                                 // Apply initial hidden styles to cards for animation to work correctly
+                                 card.style.opacity = 0;
+                                 card.style.transform = 'translateY(20px)';
+                                 
+                                 // Apply staggered effect after section becomes visible
+                                 setTimeout(() => {
+                                     card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                                     card.style.transitionDelay = `${index * 0.1}s`; 
+                                     card.style.opacity = 1;
+                                     card.style.transform = 'translateY(0)';
+                                 }, 50); // Start the staggering animation shortly after section visibility is triggered
+                            });
+                        }
+                        observer.unobserve(entry.target); // Stop observing after animation triggers
+                    }
+                });
+            }, observerOptions);
+
+            const fadeElements = document.querySelectorAll('.fade-in-section');
+            fadeElements.forEach(el => {
+                observer.observe(el);
+            });
+
+            // Hide-on-Scroll Logic for header
+            const header = document.getElementById('main-header');
+            let lastScrollY = window.scrollY;
+            const scrollThreshold = 100;
+
+            window.addEventListener('scroll', () => {
+                const currentScrollY = window.scrollY;
+
+                if (currentScrollY > lastScrollY && currentScrollY > scrollThreshold) {
+                    header.classList.add('header-hidden');
+                } else if (currentScrollY < lastScrollY || currentScrollY < 10) {
+                    header.classList.remove('header-hidden');
+                }
+
+                lastScrollY = currentScrollY;
+            });
+
+            // Appointment form handling
+            const appointmentForm = document.getElementById('appointment-form');
+            if (appointmentForm) {
+                appointmentForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // Here you would typically send the form data to your server
+                    alert('Thank you! Your appointment request has been submitted. We will contact you shortly to confirm.');
+                    this.reset();
+                });
+            }
+        });
+
+        // Scroll to appointment form function
+        function scrollToAppointment() {
+            document.getElementById('contact').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
